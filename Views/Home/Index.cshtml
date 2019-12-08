@@ -28,7 +28,7 @@
                             <tr>
                                 <td width="20%">Name</td>
                                 <td>
-                                    @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.lstEmployee, "EmployeeId", "Name"), new
+                                    @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.LstEmployee, "EmployeeId", "Name"), new
                                     {
                                         id = "ddl",
                                         @class = "selectpicker",
@@ -58,7 +58,7 @@
     });
 });
         function updateMobileNumber(val) {
-     var model = @Html.Raw(Json.Encode(Model.lstEmployee));
+     var model = @Html.Raw(Json.Encode(Model.LstEmployee));
             var currentuser = null;
             if (val === null || val === '' || val === undefined) {
                 $("#txtMobile").val('');

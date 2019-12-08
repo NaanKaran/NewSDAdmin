@@ -28,7 +28,7 @@ namespace SDAdminTool.Models
     }
     public class Employees
     {
-        public List<Employee> lstEmployee { get; set; }
+        public List<Employee> LstEmployee { get; set; }
         public Employee CurrentEmployee { get; set; }
     }
 }
