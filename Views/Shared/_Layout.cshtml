@@ -7,15 +7,13 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" type="text/css" href="style.css">
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
 </head>
 
 
 <body>
-
-    <div class="header">
-    </div>
     <content>
         @RenderBody()
     </content>
@@ -26,8 +24,6 @@
                 <p>&copy; @DateTime.Now.Year - User Configuration</p>
             </footer>
         </div>*@
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryval")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 

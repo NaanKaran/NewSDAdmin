@@ -1,6 +1,9 @@
 ﻿body {
   width: auto;
   height : auto;
+  background-image:url('Images/bg.png');
+  background-repeat:no-repeat;
+  background-size: cover;
 }
 .logo {
     position: absolute;
@@ -81,3 +84,12 @@ table {
     float: right;
 
 }
+
+
+#logo img, #logo h2 { display:inline-block; }
+.nav {position: relative;}
+.nav .stick-right {position:absolute; right:1rem; top:0; background:#ddd; padding:1rem; border-radius:0 0 .5rem .5rem;}
+.tab-content {max-width:1280px; margin:auto;}
+.tab-content table td {padding:.5rem;}
+label.error {font-size:1.1rem; color:#f35; margin-left:5px;}
+#message {color:#090;}
