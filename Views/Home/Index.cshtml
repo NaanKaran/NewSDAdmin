@@ -3,7 +3,7 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm("", "", FormMethod.Post, new { @Id="he" }))
 {
     <div class="container">
 
@@ -43,6 +43,7 @@
                             <tr><td>Mobile Phone</td><td>@Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneMobile, new { id = "txtMobile", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneMobile)</td></tr>
                             <tr><td colspan="2" width="100%"><input type="submit" value="Save" /></td></tr>
                             <tr><td colspan="2" width="100%"><label id="message"> @ViewBag.Message</label></td></tr>
+                            <tr><td colspan="2" width="100%"><label id="tt"> @ViewBag.UserName</label></td></tr>
                         </table>
                     </td>
                 </tr>

@@ -17,6 +17,7 @@ namespace SDAdminTool.Repository
 
          
             return new Employees() { LstEmployee = new List<Employee>() {
+                new Employee(){ },
                 new Employee() { EmployeeId = "hello", Firstname = "Test", Lastname = "Test1", WorkPhoneDesk = "(000)-123 654", WorkPhoneMobile = "(000)-123 654" },
                 new Employee() { EmployeeId = "hello2", Firstname = "Test", Lastname = "Test2", WorkPhoneDesk = "(000)-123 654", WorkPhoneMobile = "(000)-123 654" },
 

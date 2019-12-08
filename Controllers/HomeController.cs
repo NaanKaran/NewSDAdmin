@@ -16,7 +16,8 @@ namespace SDAdminTool.Controllers
         {
             string user = ControllerContext.HttpContext.User.Identity.Name;
             var employees = new EmployeeRepository().GetEmployees();
-
+            string vUserName = Environment.UserName;
+            ViewBag.UserName = vUserName;
             return View(employees);
         }
         [HttpPost]
