@@ -1,0 +1,85 @@
+﻿@model SDAdminTool.Models.Employees
+@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@using (Html.BeginForm())
+{
+    <div class="container">
+
+    </div>
+    <ul class="nav nav-tabs nav-justified">
+        <div id="logo">
+            <img src="Content/Images/logo.png">
+        </div>
+        <li class="active">
+            <a data-toggle="tab" href="#HomeTab">Home</a>
+        </li>
+        <li><a data-toggle="tab" href="#HistoryTab">History</a></li>
+    </ul>
+    <div class="tab-content">
+        <div id="HomeTab" class="tab-pane fade in active" role="tabpanel">
+            <br /><br /><br />
+            <table width="100%" align="center">
+                <tr>
+                    <td align="center">
+
+                        <table width="100%" style="position:center">
+                            <tr>
+                                <td width="20%">Name</td>
+                                <td>
+                                    @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.lstEmployee, "EmployeeId", "Name"), new
+                                    {
+                                        id = "ddl",
+                                        @class = "selectpicker",
+                                        data_show_subtext = "true",
+                                        data_live_search = "true",
+                                        onchange = "updateMobileNumber(this.value);"
+                                    })
+                                </td>
+                            </tr>
+                            @*<tr><td>Emp Id</td><td>@Html.TextBoxFor(x => x.CurrentEmployee.EmployeeId, new { enabled = "false", id = "txtEmployeeId" })</td></tr>*@
+                            <tr><td>Desk Phone</td><td> @Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneDesk, new { id = "txtDesk", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneDesk)</td></tr>
+                            <tr><td>Mobile Phone</td><td>@Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneMobile, new { id = "txtMobile", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneMobile)</td></tr>
+                            <tr><td colspan="2" width="100%"><input type="submit" value="Save" /></td></tr>
+                            <tr><td colspan="2" width="100%"><label id="message"> @ViewBag.Message</label></td></tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div id="HistoryTab" class="tab-pane fade" role="tabpanel"> </div>
+    </div>
+    <script language="javascript">
+        $(document).ready(function () {
+    $('.selectpicker').selectpicker({
+       liveSearch: true,
+        showSubtext: true
+    });
+});
+        function updateMobileNumber(val) {
+     var model = @Html.Raw(Json.Encode(Model.lstEmployee));
+            var currentuser = null;
+            if (val === null || val === '' || val === undefined) {
+                $("#txtMobile").val('');
+                $("#txtDesk").val('');
+                $("#txtMobile").prop('disabled',true);
+                $("#txtDesk").prop('disabled',true);
+                //$("#txtEmployeeId").val(currentuser.EmployeeId);
+                $('label[id*="message"]').text('');
+            } else {
+                $.each(model, function (index, value) {
+                    if (value.EmployeeId === val) {
+                        currentuser = value;
+                    }
+                });
+                $("#txtMobile").val(currentuser.WorkPhoneMobile);
+                $("#txtDesk").val(currentuser.WorkPhoneDesk);
+                 $("#txtMobile").prop('disabled',false);
+                $("#txtDesk").prop('disabled',false);
+                //$("#txtEmployeeId").val(currentuser.EmployeeId);
+                $('label[id*="message"]').text('');
+            }
+    }
+    </script>
+}
