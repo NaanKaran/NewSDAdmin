@@ -3,7 +3,7 @@
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@using (Html.BeginForm())
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "phoneForm" }))
 {
     <div class="container">
 
@@ -11,6 +11,10 @@
     <ul class="nav nav-tabs nav-justified">
         <div id="logo">
             <img src="Content/Images/logo.png">
+            <h2>Update Employee Contact Information</h2>
+        </div>
+        <div class="stick-right">
+            <div class="user">Logged in as Administrator</div>
         </div>
         <li class="active">
             <a data-toggle="tab" href="#HomeTab">Home</a>
@@ -41,7 +45,7 @@
                             @*<tr><td>Emp Id</td><td>@Html.TextBoxFor(x => x.CurrentEmployee.EmployeeId, new { enabled = "false", id = "txtEmployeeId" })</td></tr>*@
                             <tr><td>Desk Phone</td><td> @Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneDesk, new { id = "txtDesk", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneDesk)</td></tr>
                             <tr><td>Mobile Phone</td><td>@Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneMobile, new { id = "txtMobile", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneMobile)</td></tr>
-                            <tr><td colspan="2" width="100%"><input type="submit" value="Save" /></td></tr>
+                            <tr><td></td><td width="100%"><input type="submit" value="Save" /></td></tr>
                             <tr><td colspan="2" width="100%"><label id="message"> @ViewBag.Message</label></td></tr>
                         </table>
                     </td>
@@ -56,6 +60,9 @@
        liveSearch: true,
         showSubtext: true
     });
+    setTimeout(() => {
+        $('#message').fadeOut();
+    }, 5000);
 });
         function updateMobileNumber(val) {
      var model = @Html.Raw(Json.Encode(Model.LstEmployee));
@@ -81,5 +88,32 @@
                 $('label[id*="message"]').text('');
             }
     }
+    $("#phoneForm").removeAttr('novalidate').validate({
+        rules:{
+            'CurrentEmployee.WorkPhoneMobile':{
+                required:function(){
+                    return $('#txtDesk').val() == '';
+                },
+                phoneformat: true
+            },
+            'CurrentEmployee.WorkPhoneDesk':{
+                required:function(){
+                    return $('#txtMobile').val() == '';
+                },
+                phoneformat: true
+            }
+        },
+        messages:{
+            'CurrentEmployee.WorkPhoneMobile':{
+                required: 'Please enter Work phone number'
+            },
+            'CurrentEmployee.WorkPhoneDesk':{
+                required: 'Please enter Work Desk phone number'
+            }
+        }
+    });
+    jQuery.validator.addMethod("phoneformat", function(value, element, params) {
+        return value == '' || /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(value);
+    }, jQuery.validator.format("Please enter phone number in (###)-###-#### format."));
     </script>
 }
