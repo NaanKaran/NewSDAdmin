@@ -14,6 +14,15 @@ namespace SDAdminTool.Repository
             .ConnectionStrings["EmployeeConnection"].ConnectionString;
         public Employees GetEmployees()
         {
+
+         
+            return new Employees() { LstEmployee = new List<Employee>() {
+                new Employee() { EmployeeId = "hello", Firstname = "Test", Lastname = "Test1", WorkPhoneDesk = "(000)-123 654", WorkPhoneMobile = "(000)-123 654" },
+                new Employee() { EmployeeId = "hello2", Firstname = "Test", Lastname = "Test2", WorkPhoneDesk = "(000)-123 654", WorkPhoneMobile = "(000)-123 654" },
+
+            }
+            };
+
             SqlConnection con = new SqlConnection(_connectionString);
             con.Open();
             SqlCommand cmd = new SqlCommand("Select EmployeeId,FirstName,LastName,NetworkAlias,WorkPhoneMobile,WorkPhoneDesk from Employee", con);

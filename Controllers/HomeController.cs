@@ -15,9 +15,8 @@ namespace SDAdminTool.Controllers
         public ActionResult Index()
         {
             string user = ControllerContext.HttpContext.User.Identity.Name;
-            //var employees = new EmployeeRepository().GetEmployees();
+            var employees = new EmployeeRepository().GetEmployees();
 
-            var employees = new Employees(){LstEmployee = new List<Employee>(){new Employee() {EmployeeId = "hello"}}};
             return View(employees);
         }
         [HttpPost]
