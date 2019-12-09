@@ -10,14 +10,17 @@ using SDAdminTool.Repository;
 
 namespace SDAdminTool.Controllers
 {
+    
     public class HomeController : Controller
     {
+        //[Authorize(Users=@"DESKTOP-S929G8J\Karunakaran")]
+
+        [Authorize]
         public ActionResult Index()
         {
             string user = ControllerContext.HttpContext.User.Identity.Name;
             var employees = new EmployeeRepository().GetEmployees();
-            string vUserName = Environment.UserName;
-            ViewBag.UserName = vUserName;
+            ViewBag.UserName = Environment.UserName;
             return View(employees);
         }
         [HttpPost]
@@ -26,10 +29,11 @@ namespace SDAdminTool.Controllers
             var employees = new EmployeeRepository().GetEmployees();
             if (!string.IsNullOrEmpty(employee.CurrentEmployee.EmployeeId))
             {
-                string user = ControllerContext.HttpContext.User.Identity.Name;
+                new EmployeeRepository().AddOrUpdate(employee);
                 ViewBag.Message = "Contact Updated successfully.";
                
             }
+            ViewBag.UserName = Environment.UserName;
             return View(employees);
         }
 
