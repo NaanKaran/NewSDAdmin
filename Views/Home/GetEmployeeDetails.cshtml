@@ -33,7 +33,7 @@
 
                         <table width="100%" style="position:center">
                             <tr>
-                                <td width="20%">Name</td>
+                                <td width="20%" align="right">Name</td>
                                 <td>
                                     @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.LstEmployee, "EmployeeId", "Name"), new
                                     {
@@ -45,9 +45,9 @@
                                     })
                                 </td>
                             </tr>
-                            @*<tr><td>Emp Id</td><td>@Html.TextBoxFor(x => x.CurrentEmployee.EmployeeId, new { enabled = "false", id = "txtEmployeeId" })</td></tr>*@
-                            <tr><td>Desk Phone</td><td> @Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneDesk, new { id = "txtDesk", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneDesk)</td></tr>
-                            <tr><td>Mobile Phone</td><td>@Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneMobile, new { id = "txtMobile", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneMobile)</td></tr>
+                            @*<tr><td align="right">Emp Id</td><td>@Html.TextBoxFor(x => x.CurrentEmployee.EmployeeId, new { enabled = "false", id = "txtEmployeeId" })</td></tr>*@
+                            <tr><td align="right">Desk Phone</td><td> @Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneDesk, new { id = "txtDesk", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneDesk)</td></tr>
+                            <tr><td align="right">Mobile Phone</td><td>@Html.TextBoxFor(s => s.CurrentEmployee.WorkPhoneMobile, new { id = "txtMobile", type = "text", disabled = true })@Html.ValidationMessageFor(s => s.CurrentEmployee.WorkPhoneMobile)</td></tr>
                             <tr><td></td><td width="100%"><input type="submit" value="Save" /></td></tr>
                             <tr><td colspan="2" width="100%"><label id="message"> @ViewBag.Message</label></td></tr>
                         </table>
