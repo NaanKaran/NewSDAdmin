@@ -13,27 +13,23 @@ namespace SDAdminTool.Controllers
     
     public class HomeController : Controller
     {
-        //[Authorize(Users=@"userrole\username")]
-
-        [Authorize]
-        public ActionResult Index(string autherize)
+        [Authorize(Users=@"userrole\username")]
+        public ActionResult Index()
         {
-            ViewBag.Autherize = autherize;
+           
             return View();
         }
 
         
         [HttpGet]
+        [Authorize(Users = @"userrole\username")]
         public ActionResult GetEmployeeDetails()
         {
-            if (!User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", new { autherize  = "Your are Not Autherize."});
-            }
             var employees = new EmployeeRepository().GetEmployees();
             return View(employees);
         }
         [HttpPost]
+        [Authorize(Users = @"userrole\username")]
         public ActionResult GetEmployeeDetails(Employees employee)
         {
           
