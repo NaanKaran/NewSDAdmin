@@ -19,8 +19,15 @@
 </div>
 
 <div class="d-flex all-center custom-height">
-    <a class="call2action" href="/GetEmployeeDetails">
-        <i class="fa fa-phone"></i>
-        <span>Update Employee Contact Information</span>
-    </a>
+    <div>
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-phone"></i>
+            <span>Update Employee Contact Information</span>
+        </a>
+    </div>
+    <div>
+        <span style="color:red"> @ViewBag.Autherize </span>
+    </div>
+
 </div>
+
