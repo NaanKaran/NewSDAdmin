@@ -17,10 +17,15 @@ namespace SDAdminTool.Controllers
 
         [Authorize]
         public ActionResult Index()
+        { 
+            return View();
+        }
+
+        [Authorize]
+        [HttpGet]
+        public ActionResult GetEmployeeDetails()
         {
-            string user = ControllerContext.HttpContext.User.Identity.Name;
             var employees = new EmployeeRepository().GetEmployees();
-            ViewBag.UserName = Environment.UserName;
             return View(employees);
         }
         [HttpPost]
