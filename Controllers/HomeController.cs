@@ -13,32 +13,33 @@ namespace SDAdminTool.Controllers
     
     public class HomeController : Controller
     {
-        //[Authorize(Users=@"DESKTOP-S929G8J\Karunakaran")]
-
         [Authorize]
         public ActionResult Index()
-        { 
+        {
+           
             return View();
         }
 
-        [Authorize]
+        
         [HttpGet]
+        [Authorize]//(Users = @"userrole\username")]
         public ActionResult GetEmployeeDetails()
         {
             var employees = new EmployeeRepository().GetEmployees();
             return View(employees);
         }
         [HttpPost]
-        public ActionResult Index(Employees employee)
+        [Authorize]//(Users = @"userrole\username")]
+        public ActionResult GetEmployeeDetails(Employees employee)
         {
-            var employees = new EmployeeRepository().GetEmployees();
+          
             if (!string.IsNullOrEmpty(employee.CurrentEmployee.EmployeeId))
             {
                 new EmployeeRepository().AddOrUpdate(employee);
                 ViewBag.Message = "Contact Updated successfully.";
                
             }
-            ViewBag.UserName = Environment.UserName;
+            var employees = new EmployeeRepository().GetEmployees();
             return View(employees);
         }
 

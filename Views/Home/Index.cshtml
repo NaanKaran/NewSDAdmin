@@ -3,24 +3,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<style>
-    .d-flex {display:flex;}
-    .d-flex.all-center {align-items: center; justify-content: center;}
-    .custom-height {height:calc(100vh - 300px)}
-    .call2action {padding:1em; border:1px solid #59f; display:flex; align-items:center; width:15em; font-size:1.75rem; justify-content:center;}
-    .call2action:hover {text-decoration:none; box-shadow:0 0 10px 0 rgba(0,0,0,0.25)}
-    .call2action i, .call2action span {width:50%;}
-    .call2action i {font-size:4em; padding:1.5rem 2rem;}
-</style>
 
-<div id="logo">
-    <img src="/Content/Images/logo.png">
-    <h2>Home</h2>
-</div>
+<ul class="nav nav-tabs nav-justified">
+    <div id="logo">
+        <a href="https://braunintertec.com/"; >
+            <img src="/Content/Images/logo.png">
+            <h2>Service Desk Admin Portal</h2>
+        </a>
+
+    </div>
+    <div class="stick-right">
+        <div class="user">Logged in as @User.Identity.Name</div>
+    </div>
+    <li class="active">
+        <a data-toggle="tab" href="#HomeTab">Home</a>
+    </li>
+  @*  <li><a data-toggle="tab" href="#HistoryTab">History</a></li>*@
+</ul>
 
 <div class="d-flex all-center custom-height">
-    <a class="call2action" href="/GetEmployeeDetails">
-        <i class="fa fa-phone"></i>
-        <span>Update Employee Contact Information</span>
-    </a>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-phone"></i>
+            <span>Update Contact</span>
+        </a>
+    </div>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-address-book"></i>
+            <span>Address Book</span>
+        </a>
+    </div>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-user-circle"></i>
+            <span>View User List</span>
+        </a>
+    </div>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-area-chart"></i>
+            <span>View Stats</span>
+        </a>
+    </div>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-ban"></i>
+            <span>Blocked Contacts</span>
+        </a>
+    </div>
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-book"></i>
+            <span>View Log</span>
+        </a>
+    </div>
+    <div class="m-2 last">
+        <span style="color:red"> @ViewBag.Autherize </span>
+    </div>
+
 </div>
+

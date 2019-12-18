@@ -16,15 +16,15 @@ namespace SDAdminTool.Repository
         {
 
             //Testing purpose
-            return new Employees()
-            {
-                LstEmployee = new List<Employee>() {
-                new Employee(){ },
-                new Employee() { EmployeeId = "hello", Firstname = "Test", Lastname = "Test1", WorkPhoneDesk = "(000)-123 6543", WorkPhoneMobile = "(000)-123 6544" },
-                new Employee() { EmployeeId = "hello2", Firstname = "Test", Lastname = "Test2", WorkPhoneDesk = "(000)-123 6543", WorkPhoneMobile = "(000)-123 6544" },
+            //return new Employees()
+            //{
+            //    LstEmployee = new List<Employee>() {
+            //    new Employee(){ },
+            //    new Employee() { EmployeeId = "hello", Firstname = "Test", Lastname = "Test1", WorkPhoneDesk = "(000)-123 6543", WorkPhoneMobile = "(000)-123 6544" },
+            //    new Employee() { EmployeeId = "hello2", Firstname = "Test", Lastname = "Test2", WorkPhoneDesk = "(000)-123 6543", WorkPhoneMobile = "(000)-123 6544" },
 
-            }
-            };
+            //}
+            //};
 
             SqlConnection con = new SqlConnection(_connectionString);
             con.Open();
