@@ -13,7 +13,7 @@ namespace SDAdminTool.Controllers
     
     public class HomeController : Controller
     {
-        [Authorize]
+        [Authorize(Users=@"userrole\username")]
         public ActionResult Index()
         {
            
@@ -22,14 +22,14 @@ namespace SDAdminTool.Controllers
 
         
         [HttpGet]
-        [Authorize]//(Users = @"userrole\username")]
+        [Authorize(Users = @"userrole\username")]
         public ActionResult GetEmployeeDetails()
         {
             var employees = new EmployeeRepository().GetEmployees();
             return View(employees);
         }
         [HttpPost]
-        [Authorize]//(Users = @"userrole\username")]
+        [Authorize(Users = @"userrole\username")]
         public ActionResult GetEmployeeDetails(Employees employee)
         {
           
