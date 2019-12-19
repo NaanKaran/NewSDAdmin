@@ -13,7 +13,7 @@ namespace SDAdminTool.Controllers
     
     public class HomeController : Controller
     {
-        [Authorize(Users=@"userrole\username")]
+       // [Authorize]
         public ActionResult Index()
         {
            
@@ -22,18 +22,25 @@ namespace SDAdminTool.Controllers
 
         
         [HttpGet]
-        [Authorize(Users = @"userrole\username")]
+       // [Authorize]
         public ActionResult GetEmployeeDetails()
         {
+            var isAuthorizeUser = User.Identity.IsAuthenticated;
+            ViewBag.isAuthorizeUser = isAuthorizeUser;
             var employees = new EmployeeRepository().GetEmployees();
             return View(employees);
         }
         [HttpPost]
-        [Authorize(Users = @"userrole\username")]
+        [Authorize]
         public ActionResult GetEmployeeDetails(Employees employee)
         {
-          
-            if (!string.IsNullOrEmpty(employee.CurrentEmployee.EmployeeId))
+
+            var isAuthorizeUser = User.Identity.IsAuthenticated;
+            ViewBag.isAuthorizeUser = isAuthorizeUser;
+
+            ViewBag.Message = "Your Not Authorize to Update.";
+
+            if (!string.IsNullOrEmpty(employee.CurrentEmployee.EmployeeId) && isAuthorizeUser)
             {
                 new EmployeeRepository().AddOrUpdate(employee);
                 ViewBag.Message = "Contact Updated successfully.";

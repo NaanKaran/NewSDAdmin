@@ -180,9 +180,18 @@ label.error {
     padding: 1.5rem 2rem;
 }
 
+#submitbutton {
+    padding: .5rem 2rem;
+  
+}
 
-/* MOBILE STYLES */
-@media screen and (max-width:767px){
-    .d-flex.all-center { align-content:baseline; }
+    #submitbutton:disabled {
+        background: #ccc;
+    }
+
+
+    /* MOBILE STYLES */
+    @media screen and (max-width:767px) {
+        .d-flex.all-center { align-content:baseline; }
 }
 /* MOBILE STYLES END */
