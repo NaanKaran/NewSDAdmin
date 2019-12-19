@@ -158,6 +158,10 @@ label.error {
     background:#fff;
 }
 
+.text-center {text-align:center;}
+.d-ib {display:inline-block;}
+.error {color:#f33;}
+
 .custom-height .last {width:100%; text-align:center;}
 
 .call2action:hover {

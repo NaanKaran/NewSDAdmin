@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Home Page";
     Layout = "~/Views/Shared/_Layout.cshtml";
-
+    
     string employeeId = null;
 }
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -13,7 +13,7 @@
             <img src="/Content/Images/logo.png">
             <h2>Service Desk Admin Portal</h2>
         </a>
-
+        
     </div>
     <div class="stick-right">
         <div class="user">Logged in as @User.Identity.Name</div>
@@ -24,28 +24,32 @@
     @*  <li><a data-toggle="tab" href="#HistoryTab">History</a></li>*@
 </ul>
 
-<div class="d-flex all-center custom-height">
-
-    <div class="m-2">
-        <div style="text-align:left">Name</div>
-        <div style="text-align:right">
-            @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.LstEmployee, "EmployeeId", "Name"), new
-       {
-           id = "ddl",
-           @class = "selectpicker",
-           data_show_subtext = "true",
-           data_live_search = "true",
-           onchange = "updateMobileNumber(this.value);"
-       })
-        </div>
+<div class="text-center">
+    <div class="d-ib m-2">
+        <label for="ddl" style="margin-right:1rem;">Name</label>
+        @Html.DropDownListFor(x => x.CurrentEmployee.EmployeeId, new SelectList(Model.LstEmployee, "EmployeeId", "Name"), new
+        {
+            id = "ddl",
+            @class = "selectpicker",
+            data_show_subtext = "true",
+            data_live_search = "true",
+            onchange = "updateMobileNumber(this.value);"
+        })
+        <div class="error" id="errorddl"></div>
     </div>
-    <input id="Hidden1" type="hidden" runat="server" />
-    <div class="m-2">
-        <a class="call2action" href="@Url.Action("GetEmployeeDetails", new { employeeId })">
+    <div>
+        <input id="Hidden1" type="hidden" runat="server" />
+    </div>
+    <div class="d-ib m-2" id="updateContact">
+        <button class="call2action" onclick="getEmployeeDetails()">
             <i class="fa fa-phone"></i>
             <span>Update Contact</span>
-        </a>
+        </button>
     </div>
+</div>
+
+@*
+<div class="d-flex all-center custom-height">
     <div class="m-2">
         <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
             <i class="fa fa-address-book"></i>
@@ -70,50 +74,59 @@
             <span>Blocked Contacts</span>
         </a>
     </div>
-    @*<div class="m-2">
-            <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
-                <i class="fa fa-book"></i>
-                <span>View Log</span>
-            </a>
-        </div>*@
-
-
+    <div class="m-2">
+        <a class="call2action" href="@Url.Action("GetEmployeeDetails")">
+            <i class="fa fa-book"></i>
+            <span>View Log</span>
+        </a>
+    </div>
 </div>
+*@
 
 <script language="javascript">
-        $(document).ready(function () {
-    $('.selectpicker').selectpicker({
-       liveSearch: true,
-        showSubtext: true
+    var employeeId = '';
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({
+            liveSearch: true,
+            showSubtext: true
+        });
+        setTimeout(() => {
+            $('#message').fadeOut();
+        }, 5000);
     });
-    setTimeout(() => {
-        $('#message').fadeOut();
-    }, 5000);
-});
-        function updateMobileNumber(val) {
-     var model = @Html.Raw(Json.Encode(Model.LstEmployee));
-            var currentuser = null;
-            if (val === null || val === '' || val === undefined) {
-                $("#txtMobile").val('');
-                $("#txtDesk").val('');
-                $("#txtMobile").prop('disabled',true);
-                $("#txtDesk").prop('disabled',true);
-                //$("#txtEmployeeId").val(currentuser.EmployeeId);
-                $('label[id*="message"]').text('');
-            } else {
-                $.each(model, function (index, value) {
-                    if (value.EmployeeId === val) {
-                        currentuser = value;
-                    }
-                });
-                @employeeId = currentuser.EmployeeId; 
-                $("#txtMobile").val(currentuser.WorkPhoneMobile);
-                $("#txtDesk").val(currentuser.WorkPhoneDesk);
-                 $("#txtMobile").prop('disabled',false);
-                $("#txtDesk").prop('disabled',false);
-                //$("#txtEmployeeId").val(currentuser.EmployeeId);
-                $('label[id*="message"]').text('');
-            }
+    function updateMobileNumber(val) {
+        var model = @Html.Raw(Json.Encode(Model.LstEmployee));
+        var currentuser = null;
+        if (val === null || val === '' || val === undefined) {
+            employeeId = '';
+            $("#txtMobile").val('');
+            $("#txtDesk").val('');
+            $("#txtMobile").prop('disabled',true);
+            $("#txtDesk").prop('disabled',true);
+            //$("#txtEmployeeId").val(currentuser.EmployeeId);
+            $('label[id*="message"]').text('');
+        } else {
+            $.each(model, function (index, value) {
+                if (value.EmployeeId === val) {
+                    currentuser = value;
+                }
+            });
+            $('#errorddl').html('');
+            employeeId = currentuser.EmployeeId; 
+            $("#txtMobile").val(currentuser.WorkPhoneMobile);
+            $("#txtDesk").val(currentuser.WorkPhoneDesk);
+            $("#txtMobile").prop('disabled',false);
+            $("#txtDesk").prop('disabled',false);
+            //$("#txtEmployeeId").val(currentuser.EmployeeId);
+            $('label[id*="message"]').text('');
+        }
+    }
+    function getEmployeeDetails(){
+        if(employeeId){
+            window.location = 'Home/GetEmployeeDetails?employeeId=' + employeeId;
+        } else{
+            $('#errorddl').html('Please Select an employee');
+        }
     }
     $("#phoneForm").removeAttr('novalidate').validate({
         rules:{
